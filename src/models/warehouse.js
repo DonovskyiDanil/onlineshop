@@ -1,17 +1,17 @@
 module.exports = (sequelize, DataTypes) => {
   const Warehouse = sequelize.define('Warehouse', {
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     location: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
-    capacity: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    }
   });
 
   Warehouse.associate = (models) => {
-    Warehouse.hasMany(models.Product, { foreignKey: 'warehouseId' });
+    Warehouse.belongsTo(models.Category, { foreignKey: 'categoryId', as: 'category' });
   };
 
   return Warehouse;
